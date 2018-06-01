@@ -1152,6 +1152,16 @@ def cc(request, run_id):
 
     return render(request, 'run/get_cc.html', context_data)
 
+def attachment(request, run_id, template_name='run/attachment.html'):
+    """Add or remove cc from a test run"""
+
+    tr = get_object_or_404(TestRun, run_id=run_id)
+    context_data = {
+        'test_run': tr,
+        'limit': settings.FILE_UPLOAD_MAX_SIZE,
+    }
+
+    return render(request, template_name, context_data)
 
 @require_POST
 def update_case_run_text(request, run_id):

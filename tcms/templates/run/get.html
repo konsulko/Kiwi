@@ -197,6 +197,12 @@ jQ(function() {
 				<div class="title grey">Set Status Automatically&nbsp;:</div>
 				<div class="name"> {{ test_run.auto_update_run_status }} </div>
 			</div>
+			<div class="listinfo">
+				<div class="title grey">Attachments&nbsp;:</div>
+				<div class="linotype name">
+					{% include 'run/get_attachment.html' %}
+				</div>
+			</div>
 		<div class="clear"></div>
 	</div>
 

@@ -1,0 +1,46 @@
+{% extends "tcms_base.html" %}
+{% load static %}
+{% load attachments_tags %}
+
+{% block subtitle %}{{ test_run.name }}{% endblock %}
+
+{% block custom_stylesheet %}
+<link rel="stylesheet" type="text/css" href="{% static 'style/print.css' %}" media="print" />
+{% endblock %}
+
+{% block contents %}
+
+<div id="content">
+	<h2>{{ test_run.summary }}</h2>
+	<div class="Detailform border-1">
+                {% attachment_form test_run %}
+
+                <span class="right-action">
+                    Note: Each attachment size limit is {{ limit|filesizeformat }}.
+                </span>
+
+		<table class="list" cellspacing="1" cellspan="0">
+			<thead>
+				<tr>
+					<th align="left">File name</th>
+					<th align="left" width="20%">Submitter</th>
+					<th align="left" width="20%">Create date</th>
+					<th align="left" width="10%">Action</th>
+				</tr>
+			</thead>
+			<tbody>
+                            {% get_attachments_for test_run as attachments_list %}
+                            {% for attachment in attachments_list %}
+				<tr class="{% cycle 'odd' 'even' %}">
+					<td><a href="{{ attachment.attachment_file.url }}">{{ attachment.filename }}</a></td>
+					<td>{{ attachment.creator }}</td>
+					<td>{{ attachment.created }}</td>
+					<td>{% attachment_delete_link attachment %}</td>
+				</tr>
+                            {% endfor %}
+			</tbody>
+		</table>
+	</div>
+</div>
+
+{% endblock %}
