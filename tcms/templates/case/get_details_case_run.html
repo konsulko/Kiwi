@@ -46,11 +46,13 @@
 				<h4 class="borderB">Comments History ({{ comments_count }}):
 				{% ifequal comments_count 0 %}
 					<span>[ <a id="showText" href="javascript:void(0);">Show All</a> ]</span>
-				{% else %}
-					<span>[ <a id="showText" class="js-show-comments" data-param="comment{{ test_case_run.pk }}" href="javascript:void(0);">Show All</a> ]</span>
-				{% endifequal %}
 				</h4>
 				<ul class="comment" id="comment{{ test_case_run.pk }}" style="display:none;">
+				{% else %}
+					<span>[ <a id="showText" class="js-show-comments" data-param="comment{{ test_case_run.pk }}" href="javascript:void(0);">Hide All</a> ]</span>
+				</h4>
+				<ul class="comment" id="comment{{ test_case_run.pk }}">
+				{% endifequal %}
 					{% for comment in caserun_comments %}
 					<li>
 						<span>#{{ forloop.counter }}</span>
